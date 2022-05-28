@@ -8,21 +8,25 @@ import { ResultsItem } from '../results-item';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  private loading: boolean = false;
-  posts = new Array<ResultsItem>();
-  constructor(private itunes: SearchService) {}
+  loading: boolean = false;
+  searchResults = new Array<ResultsItem>();
+  constructor(private searchService: SearchService) {}
 
   doSearch(term: string) {
     this.loading = true;
-    this.itunes.search(term).subscribe((response) => {
-      this.posts = 
-        response.results.map((result) => 
-            new ResultsItem (
-              result.artworkUrl30, 
-              result.trackViewUrl, 
-              result.trackName)
+    this.searchService.search(term).subscribe((response) => {
+      this.searchResults = response.results.map(
+        (result) =>
+          new ResultsItem(
+            result.trackName,
+            result.artistName,
+            result.trackViewUrl,
+            result.artworkUrl30,
+            result.artistId
+          )
       );
-      console.log(this.posts);
+      this.loading = false;
+      console.log(this.searchResults);
     });
   }
 }

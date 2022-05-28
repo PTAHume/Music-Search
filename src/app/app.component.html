@@ -4,18 +4,27 @@
       type="search"
       class="form-control"
       placeholder="Enter search string"
-      #search/> (1)
+      #search
+    />
   </div>
-  <button class="btn btn-primary" (click)="doSearch(search.value)">
-    (2) Search
+  <button
+    type="button"
+    class="btn btn-primary"
+    (click)="doSearch(search.value)"
+  >
+    Search
   </button>
-  <ul class="list-group">
-  <li class="list-group-item"
-      *ngFor="let result of posts">
-    <img src="{{result.artworkUrl30}}">
-    <a target="_blank"
-       href="{{result.trackViewUrl}}">{{ result.trackName }}
-    </a>
+</form>
+
+<hr />
+
+<div class="text-center">
+  <p class="lead" *ngIf="loading">Loading...</p>
+</div>
+
+<ul class="list-group">
+  <li class="list-group-item" *ngFor="let item of searchResults">
+    <img src="{{ item.thumbnail }}" />
+    <a target="_blank" href="{{ item.link }}">{{ item.track }} </a>
   </li>
 </ul>
-</form>

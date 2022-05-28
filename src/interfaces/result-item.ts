@@ -1,5 +1,7 @@
 export interface ResultItem {
-  artworkUrl30: string;
-  trackViewUrl: string;
-  trackName: string;
+  track: string;
+  artist: string;
+  link: string;
+  thumbnail: string;
+  artistId: string;
 }
