@@ -9,7 +9,7 @@ export class SearchService {
   constructor(private http: HttpClient) {}
 
   search(term: string): Observable<any> {
-    let apiURL = `${this.apiRoot}?term=${term}&media=music`;
+    let apiURL = `${this.apiRoot}?term=${term}&media=music&limit=20`;
     let response = this.http.get<any>(apiURL);
     console.log(response);
     return response;
