@@ -1,0 +1,21 @@
+<form class="form-inline">
+  <div class="form-group">
+    <input
+      type="search"
+      class="form-control"
+      placeholder="Enter search string"
+      #search/> (1)
+  </div>
+  <button class="btn btn-primary" (click)="doSearch(search.value)">
+    (2) Search
+  </button>
+  <ul class="list-group">
+  <li class="list-group-item"
+      *ngFor="let result of posts">
+    <img src="{{result.artworkUrl30}}">
+    <a target="_blank"
+       href="{{result.trackViewUrl}}">{{ result.trackName }}
+    </a>
+  </li>
+</ul>
+</form>
