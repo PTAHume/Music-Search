@@ -1,17 +1,39 @@
-<form class="form-inline">
+<form class="form-inline" [formGroup]="searchform">
   <div class="form-group">
+    &nbsp; &nbsp;
     <input
       type="search"
       class="form-control"
-      placeholder="Enter the name of a song or band"
+      placeholder="Enter the name of a song or band to search for"
+      name="search"
+      id="search"
+      formControlName="search"
+      required
       #search />
   </div>
-  <br/>
+  <div 
+      *ngIf="searchControls['search'].touched 
+            && searchControls['search'].invalid" 
+      class="alert alert-danger">
+    <div 
+        *ngIf="searchControls['search'].errors
+              && searchControls['search'].errors['required']">
+      Name is required.
+    </div>
+    <div 
+        *ngIf="searchControls['search'].errors 
+              && searchControls['search'].errors['minlength']">
+      Name should be 3 character.
+    </div>
+  </div>
+  <p></p>
+  &nbsp; &nbsp;
   <button
     type="button"
     class="btn btn-primary"
-    (click)="doSearch(search.value)">
-    Search 
+    (click)="doSearch(search.value)"
+    [disabled]="searchform.invalid">
+    Search
   </button>
 </form>
 
@@ -23,7 +45,7 @@
 
 <ul class="list-group">
   <li class="list-group-item" *ngFor="let item of searchResults">
-    <img src="{{ item.thumbnail }}" />
+    <img src="{{ item.thumbnail }}" /> &nbsp;
     <a target="_blank" href="{{ item.link }}">{{ item.track }} </a>
   </li>
 </ul>

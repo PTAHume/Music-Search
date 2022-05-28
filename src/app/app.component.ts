@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { SearchService } from '../search.service';
 import { ResultsItem } from '../results-item';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'my-app',
@@ -12,9 +13,17 @@ export class AppComponent {
   searchResults = new Array<ResultsItem>();
   constructor(private searchService: SearchService) {}
 
-  doSearch(term: string) {
+  searchform = new FormGroup({
+    search: new FormControl('', [Validators.required, Validators.minLength(3)]),
+  });
+
+  get searchControls() {
+    return this.searchform.controls;
+  }
+
+  doSearch(searchTerm: string) {
     this.loading = true;
-    this.searchService.search(term).subscribe((response) => {
+    this.searchService.search(searchTerm).subscribe((response) => {
       this.searchResults = response.results.map(
         (result) =>
           new ResultsItem(
