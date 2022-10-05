@@ -25,7 +25,7 @@ export class AppComponent {
     this.loading = true;
     this.searchService.search(searchTerm).subscribe((response) => {
       this.searchResults = response.results.map(
-        (result) =>
+        (result: any) =>
           new ResultsItem(
             result.trackName,
             result.artistName,

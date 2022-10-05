@@ -5,7 +5,7 @@ import { Observable, throwError } from 'rxjs';
 @Injectable({ providedIn: 'root' })
 export class SearchService {
   apiRoot: string = 'https://itunes.apple.com/search';
-  loading:boolean
+  loading: boolean = false;
   constructor(private http: HttpClient) {}
 
   search(term: string): Observable<any> {
